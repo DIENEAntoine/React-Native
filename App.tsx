@@ -1,30 +1,33 @@
-import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {  Platform } from "react-native";
 import Home from "./components/Home";
-import Deatils from "./components/Details";
+import News from "./components/News";
 import Settings from "./components/Settings";
-import { RootStackParamList } from "./router";
-import { Button } from "react-native";
+import { Routes } from "./router";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator<Routes>();
+const Drawer = createDrawerNavigator<Routes>();
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Details" component={Deatils} options={({ route }) => ({
-          headerRight: () => {
-            return (
-              <Button 
-                title="Buy"
-                onPress={() => {}}
-                disabled={route.params.stock === 0}
-              />
-            );
-          }
-        })} />
-      </Stack.Navigator>
+      {Platform.OS === "ios" && (
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={Home}/>
+          <Tab.Screen name="News" component={News} />
+          <Tab.Screen name="Settings" component={Settings} />
+        </Tab.Navigator>
+      )}
+
+      {Platform.OS === "android" && (
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={Home}/>
+          <Tab.Screen name="News" component={News} />
+          <Tab.Screen name="Settings" component={Settings} />
+        </Tab.Navigator>
+      )}
     </NavigationContainer>
   );
 }

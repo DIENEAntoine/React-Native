@@ -1,4 +1,5 @@
 import { Platform, StyleSheet, StatusBar } from "react-native";
+import { blue } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -38,5 +39,5 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-around",
         alignSelf: "stretch",
-    }
+    },
 })
